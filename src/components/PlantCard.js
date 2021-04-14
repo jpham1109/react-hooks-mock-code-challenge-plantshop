@@ -4,7 +4,7 @@ function PlantCard({plant, onDeletePlant, onUpdatePlant}) {
   const { id, name, image, price } = plant
 
   const [stock, setStock] = useState(true)
-  const [updatedPrice, setUpdatedPrice] = useState(price)
+  const [updatedPrice, setUpdatedPrice] = useState(" ")
 
   function handleStockClick() {
     setStock(stock => !stock)
@@ -28,6 +28,7 @@ function PlantCard({plant, onDeletePlant, onUpdatePlant}) {
     })
     .then(r => r.json())
     .then(onUpdatePlant)
+    setUpdatedPrice(" ")
   }
   
   return (
@@ -49,7 +50,6 @@ function PlantCard({plant, onDeletePlant, onUpdatePlant}) {
         className="warning"
         onClick={handleDeleteClick}>Delete</button>
       <form onSubmit={handlePriceSubmit}>
-        <label>Add new price</label>
         <input type="number" name="price" step="0.01" placeholder="New price.." value={updatedPrice} onChange={(event) => setUpdatedPrice(parseFloat(event.target.value))}/>
         <button type="submit">Update Price</button>
       </form>
